@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<history>
+<sql date="1566555590595" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">drop table employee_data</sql>
+<sql date="1566469284749" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull">show databases</sql>
+<sql date="1566556187065" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from employee_data</sql>
+<sql date="1566469305318" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull">show tables</sql>
+<sql date="1566555662574" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">show tables</sql>
+<sql date="1566548662838" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">delete from employee where empid=107</sql>
+<sql date="1566555454059" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">drop table department_data</sql>
+<sql date="1566472293343" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">rename table untitled to Employees</sql>
+<sql date="1566556094037" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from department_data</sql>
+<sql date="1566543441863" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from employes</sql>
+<sql date="1566543432848" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from emplyees</sql>
+<sql date="1566543439148" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from employees</sql>
+<sql date="1566472261744" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">rename table untitles Employees</sql>
+<sql date="1566543426269" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from emplyee</sql>
+<sql date="1566469284770" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull">use bank_database</sql>
+<sql date="1566469330234" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull">desc address</sql>
+<sql date="1566473171407" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from employess</sql>
+<sql date="1566469301512" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull">desc</sql>
+<sql date="1566548672162" url="jdbc:mysql://localhost:3306/javatrain?zeroDateTimeBehavior=convertToNull">select * from employee</sql>
+</history>

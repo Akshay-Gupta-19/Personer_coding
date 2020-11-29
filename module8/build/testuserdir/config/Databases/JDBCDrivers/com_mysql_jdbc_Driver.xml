@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<!DOCTYPE driver PUBLIC '-//NetBeans//DTD JDBC Driver 1.1//EN' 'http://www.netbeans.org/dtds/jdbc-driver-1_1.dtd'>
+<driver>
+  <name value='MySQL'/>
+  <display-name value='MySQL (Connector/J driver)'/>
+  <class value='com.mysql.jdbc.Driver'/>
+  <urls>
+    <url value='file:/C:/Users/akggupta/Documents/mysql-connector-java-8.0.17.jar'/>
+  </urls>
+</driver>

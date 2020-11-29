@@ -1,0 +1,2 @@
+GoogleKickStart.G19.FastReader
+GoogleKickStart.G19.Solution

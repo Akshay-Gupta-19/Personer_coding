@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="org-netbeans-modules-java-hints">
+        <folder name="code-hints">
+            <folder name="HIntTest-ToString.class">
+                <folder name="org-netbeans-spi-java-hints-Hint.annotation">
+                    <!--HIntTest.ToString-->
+                    <attr bundlevalue="HIntTest.Bundle#DN_ToString" name="displayName"/>
+                    <attr bundlevalue="HIntTest.Bundle#DESC_ToString" name="description"/>
+                    <attr name="category" stringvalue="general"/>
+                </folder>
+                <!--HIntTest.ToString-->
+                <folder name="computeWarning.method">
+                    <folder name="org-netbeans-spi-java-hints-TriggerTreeKind.annotation">
+                        <folder name="value">
+                            <!--HIntTest.ToString.computeWarning(org.netbeans.spi.java.hints.HintContext)-->
+                            <attr name="item0" stringvalue="com.sun.source.tree.Tree$Kind.STRING_LITERAL"/>
+                        </folder>
+                        <!--HIntTest.ToString.computeWarning(org.netbeans.spi.java.hints.HintContext)-->
+                    </folder>
+                    <!--HIntTest.ToString.computeWarning(org.netbeans.spi.java.hints.HintContext)-->
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="OptionsDialog">
+        <folder name="Keywords">
+            <file name="HIntTest.ToString">
+                <!--HIntTest.ToString-->
+                <attr name="location" stringvalue="Editor"/>
+                <attr bundlevalue="org.netbeans.modules.options.editor.Bundle#CTL_Hints_DisplayName" name="tabTitle"/>
+                <attr bundlevalue="HIntTest.Bundle#DN_ToString" name="keywords-1"/>
+                <attr bundlevalue="HIntTest.Bundle#DESC_ToString" name="keywords-2"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

@@ -1,0 +1,1 @@
+ERROR:58:cannot find symbol\n  symbol\d   method myFun()\n  location\d class helloworld.HelloWorld
