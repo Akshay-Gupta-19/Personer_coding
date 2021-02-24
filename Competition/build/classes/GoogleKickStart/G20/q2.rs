@@ -1,5 +1,0 @@
-GoogleKickStart.FastReader
-GoogleKickStart.Solution
-GoogleKickStart.G20.FastReader2
-GoogleKickStart.G20.Solution2
-GoogleKickStart.G20.FastReader

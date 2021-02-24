@@ -1,2 +1,0 @@
-KickStartD20.FastReader
-KickStartD20.Solution4

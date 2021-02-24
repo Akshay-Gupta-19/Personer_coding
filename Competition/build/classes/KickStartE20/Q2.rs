@@ -1,3 +1,0 @@
-KickStartE20.Solution
-KickStartE20.FastReader
-KickStartE20.Pair

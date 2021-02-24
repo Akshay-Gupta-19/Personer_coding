@@ -1,2 +1,0 @@
-GoogleKickStart.FastReader
-GoogleKickStart.Solution

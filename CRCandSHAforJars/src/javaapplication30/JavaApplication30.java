@@ -29,7 +29,7 @@ public class JavaApplication30 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, NoSuchAlgorithmException {
-        File f = new File("D:\\Download_2\\nb_jars_on_hg");
+        File f = new File("C:\\Users\\USER\\Downloads\\Java_realted\\nbjavacgit\\nbjavac15002_jars");
         File jars[] = f.listFiles();
         for (int i = 0; i < jars.length; i++) {
             FileInputStream fis = new FileInputStream(jars[i]);
@@ -39,10 +39,11 @@ public class JavaApplication30 {
             cr.update(ba);
             long crcAns = cr.getValue();
             File extLink;
+            String netbeansLoc="C:\\netbeansSource\\netbeans";
             if (i == 0) {
-                extLink = new File("C:\\netbeans_akshayfork2_03102019\\netbeans\\nb\\updatecenters\\extras\\nbjavac.api\\release\\modules\\ext\\nb-javac-15-api.jar.external");
+                extLink = new File(netbeansLoc+"\\nb\\updatecenters\\extras\\nbjavac.api\\release\\modules\\ext\\nb-javac-15.0.0.2-api.jar.external");
             } else {
-                extLink = new File("C:\\netbeans_akshayfork2_03102019\\netbeans\\nb\\updatecenters\\extras\\nbjavac.impl\\release\\modules\\ext\\nb-javac-15-impl.jar.external");
+                extLink = new File(netbeansLoc+"\\nb\\updatecenters\\extras\\nbjavac.impl\\release\\modules\\ext\\nb-javac-15.0.0.2-impl.jar.external");
             }
             FileWriter exW = new FileWriter(extLink);
             String fs = "CRC:" + crcAns + "\n";
