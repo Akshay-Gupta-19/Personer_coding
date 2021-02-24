@@ -5,9 +5,12 @@
  */
 package treedemo;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -17,23 +20,98 @@ import javax.swing.JPanel;
  */
 public class BSTGenerator extends javax.swing.JFrame {
 
+    Tree t;
+
     /**
      * Creates new form BSTGenerator
      */
-    public BSTGenerator() {    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public BSTGenerator() {
         initComponents();
+        t = new Tree();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setResizable(false);
+        this.setLocation(0, 0);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        int x=10;
-        while(x<100){
-            g.fillOval(100, 100, x, x);
+        if (t != null) {
+            printTree(t, g);
         }
     }
-    
+
+    void printTree(Tree t, Graphics g) {
+        recursivePrintTree(t.root, g, this.getWidth() / 2, 100, this.getWidth());
+    }
+    final int nodeWidth = 50;
+    final int oneLevelHeight = 200;
+
+    void recursivePrintTree(TreeNode cn, Graphics g, int cx, int cy, int aw) {
+        if (cn == null) {
+            return;
+        }
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(3));
+        g2d.setColor(Color.green);
+        if (cn.leftChild != null) {
+            g2d.drawLine(cx - (nodeWidth / 2), cy + nodeWidth, cx - (aw / 4), cy + oneLevelHeight);
+        }
+        if (cn.rightChild != null) {
+            g2d.drawLine(cx + (nodeWidth / 2), cy + nodeWidth, cx + (aw / 4), cy + oneLevelHeight);
+        }
+        g2d.setColor(Color.red);
+        g2d.fillRect(cx - (nodeWidth / 2), cy, nodeWidth, nodeWidth);
+        g2d.setColor(Color.BLUE);
+        g2d.setFont(new Font("Arial Black", Font.BOLD, 20));
+        g2d.drawString(cn.data + "", cx - 6, cy + nodeWidth / 2 + 5);
+        recursivePrintTree(cn.leftChild, g2d, cx - aw / 4, cy + oneLevelHeight, aw / 2);
+        recursivePrintTree(cn.rightChild, g2d, cx + aw / 4, cy + oneLevelHeight, aw / 2);
+    }
+
+    class Tree {
+
+        TreeNode root;
+
+        void insert(int x) {
+            if (root == null) {
+                root = new TreeNode(x);
+                return;
+            }
+            recursiveInsert(root, x);
+        }
+
+        void recursiveInsert(TreeNode root, int x) {
+            if (root == null) {
+                return;
+            }
+            if (root.data < x) {
+                if (root.rightChild == null) {
+                    root.rightChild = new TreeNode(x);
+                } else {
+                    recursiveInsert(root.rightChild, x);
+                }
+            } else {
+                if (root.leftChild == null) {
+                    root.leftChild = new TreeNode(x);
+                } else {
+                    recursiveInsert(root.leftChild, x);
+                }
+            }
+        }
+    }
+
+    class TreeNode {
+
+        int data;
+        TreeNode leftChild, rightChild;
+
+        public TreeNode(int data) {
+            this.data = data;
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,13 +122,20 @@ public class BSTGenerator extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        dataToEnter = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Remove");
 
@@ -58,35 +143,60 @@ public class BSTGenerator extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(254, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(dataToEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(70, 70, 70)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataToEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int data = Integer.parseInt(dataToEnter.getText());
+            t.insert(data);
+            jLabel2.setText("");
+        } catch (NumberFormatException ex) {
+            jLabel2.setText("Please enetr a valid number");
+            return;
+        }
+        dataToEnter.setText("");
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,9 +234,11 @@ public class BSTGenerator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField dataToEnter;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
