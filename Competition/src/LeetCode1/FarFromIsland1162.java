@@ -12,11 +12,11 @@ import java.util.Objects;
  *
  * @author USER
  */
-class Pair {
+class Pair32 {
 
     int x, y;
 
-    public Pair(int x, int y) {
+    public Pair32(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -37,7 +37,7 @@ class Pair {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pair other = (Pair) obj;
+        final Pair32 other = (Pair32) obj;
         if (this.x != other.x) {
             return false;
         }
@@ -73,17 +73,17 @@ public class FarFromIsland1162 {
                 if (grid[i][j] == 0) {
                     boolean v[][] = new boolean[grid.length][grid[0].length];
                     int dis[][] = new int[grid.length][grid[0].length];
-                    LinkedList<Pair> buf = new LinkedList<>();
-                    buf.add(new Pair(i, j));
+                    LinkedList<Pair32> buf = new LinkedList<>();
+                    buf.add(new Pair32(i, j));
                     dis[i][j]=0;
                     v[i][j]=true;
                     int cdl=Integer.MAX_VALUE;
                     while (!buf.isEmpty()) {
-                        Pair g=buf.pollFirst();
+                        Pair32 g=buf.pollFirst();
                         int ci=g.x;
                         int cj=g.y;
                         if (checkZero(grid, v, ci+1, cj)) {
-                            buf.add(new Pair(ci+1, cj));
+                            buf.add(new Pair32(ci+1, cj));
                             v[ci+1][cj] = true;
                             dis[ci+1][cj]=dis[ci][cj]+1;
                         }
@@ -92,7 +92,7 @@ public class FarFromIsland1162 {
                             break;
                         }
                         if (checkZero(grid, v, ci-1, cj)) {
-                            buf.add(new Pair(ci-1, cj));
+                            buf.add(new Pair32(ci-1, cj));
                             v[ci-1][cj] = true;
                            dis[ci-1][cj]=dis[ci][cj]+1;
                         }
@@ -101,7 +101,7 @@ public class FarFromIsland1162 {
                             break;
                         }
                         if (checkZero(grid, v, ci, cj+1)) {
-                            buf.add(new Pair(ci, cj+1));
+                            buf.add(new Pair32(ci, cj+1));
                             v[ci][cj+1] = true;
                            dis[ci][cj+1]=dis[ci][cj]+1;
                         }
@@ -110,7 +110,7 @@ public class FarFromIsland1162 {
                             break;
                         }
                         if (checkZero(grid, v, ci, cj-1)) {
-                            buf.add(new Pair(ci, cj-1));
+                            buf.add(new Pair32(ci, cj-1));
                             v[ci][cj-1] = true;
                            dis[ci][cj-1]=dis[ci][cj]+1;
                         }

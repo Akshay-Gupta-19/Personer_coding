@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="HIntTest">
-    <module_version install_time="1576233608194" last="true" origin="installer" specification_version="1.0">
-        <file crc="2010716905" name="config/Modules/HIntTest.xml"/>
-        <file crc="4195370138" name="modules/HIntTest.jar"/>
-    </module_version>
-</module>

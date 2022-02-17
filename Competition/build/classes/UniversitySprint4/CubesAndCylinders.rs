@@ -1,0 +1,2 @@
+UniversitySprint4.Pair
+UniversitySprint4.Solution

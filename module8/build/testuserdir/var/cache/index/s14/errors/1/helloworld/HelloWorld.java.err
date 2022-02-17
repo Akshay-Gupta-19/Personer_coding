@@ -1,3 +1,0 @@
-ERROR:17:';' expected
-ERROR:17:method map in interface java.util.stream.Stream<T> cannot be applied to given types;\n  required\d java.util.function.Function<? super java.lang.String,? extends R>\n  found\d    (s)->{ }\n  reason\d cannot infer type-variable(s) R\n    (argument mismatch; bad return type in lambda expression\n      missing return value)
-ERROR:18:missing return statement

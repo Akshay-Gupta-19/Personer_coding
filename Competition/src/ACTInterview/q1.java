@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package ACTInterview;
-
+import java.util.*;
 /**
  *
  * @author AKGGUPTA
  */
 public class q1 {
-    
+    public static void main(String[] args) {
+        
+    }
 }

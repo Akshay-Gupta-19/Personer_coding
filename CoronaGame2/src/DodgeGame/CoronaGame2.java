@@ -23,7 +23,7 @@ final public class CoronaGame2 {
     int diry[];
     boolean start;
     int score = 0;
-    boolean fuzzy;
+    int smothness=1;
     int diffculty;
     int virusSize;
     int numVirus;
@@ -136,13 +136,9 @@ final public class CoronaGame2 {
 
         new Thread(() -> {
             while (true) {
-
+                int randomDirChange=random.nextInt(numVirus*(smothness+1)*10);
                 for (int i = 0; i < numVirus; i++) {
-                    if (score > diffculty && fuzzy) {
-                        diry[i] = (random.nextBoolean() ? score / diffculty : -score / diffculty) + (random.nextBoolean() ? 2 : -2);
-                        dirx[i] = (random.nextBoolean() ? score / diffculty : -score / diffculty) + (random.nextBoolean() ? 2 : -2);
-                    }
-                    if (oneX[i] >= frame.getWidth() - 1) {
+                    if (oneX[i] >= frame.getWidth() - 1 ||  randomDirChange<i) {
                         dirx[i] = -dirx[i];
                         diry[i] =random.nextInt(2 * speed + 1) - (speed);
                     }
@@ -150,7 +146,7 @@ final public class CoronaGame2 {
                         dirx[i] = -dirx[i];
                         diry[i] = random.nextInt(2 * speed + 1) - (speed);
                     }
-                    if (oneY[i] >= frame.getHeight() - 1) {
+                    if (oneY[i] >= frame.getHeight() - 1  ||  randomDirChange<i) {
                         diry[i] = -diry[i];
                         dirx[i] =random.nextInt(2 * speed + 1) - (speed);
                     }

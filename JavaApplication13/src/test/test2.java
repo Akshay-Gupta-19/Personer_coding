@@ -1,1 +1,0 @@
-package test; class Test2 { private void test() {int i = 0; new Runnable() { public void run() {} }; } }

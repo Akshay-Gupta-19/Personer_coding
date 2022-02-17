@@ -1,0 +1,3 @@
+LeetCode1.Solution
+LeetCode1.Solution2
+LeetCode1.Solution1

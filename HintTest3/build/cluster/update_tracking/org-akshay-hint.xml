@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.akshay.hint">
-    <module_version install_time="1567759497456" last="true" origin="installer" specification_version="1.0">
-        <file crc="2412371610" name="config/Modules/org-akshay-hint.xml"/>
-        <file crc="1639563582" name="modules/org-akshay-hint.jar"/>
-    </module_version>
-</module>

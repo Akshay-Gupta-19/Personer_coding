@@ -1,4 +1,0 @@
-ERROR:17:';' expected
-ERROR:17:cannot find symbol\n  symbol\d   variable c\n  location\d class helloworld.TestIncomp
-ERROR:17:cannot find symbol\n  symbol\d   variable d\n  location\d class helloworld.TestIncomp
-ERROR:17:cannot find symbol\n  symbol\d   variable e\n  location\d class helloworld.TestIncomp

@@ -25,7 +25,6 @@ public class StartGame extends javax.swing.JFrame {
     public StartGame() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        jRadioButton2.setSelected(true);
         jButton1.setLocation(jButton1.getX()-300,jButton1.getY());
         jSpinner1.setValue(50);
         jSpinner3.setValue(100);
@@ -55,8 +54,6 @@ public class StartGame extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
@@ -70,6 +67,8 @@ public class StartGame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jSpinner5 = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,17 +78,6 @@ public class StartGame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Fuzzy");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Smooth");
 
         jLabel2.setText("Number");
 
@@ -109,6 +97,8 @@ public class StartGame extends javax.swing.JFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel8.setText("Fuzzy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,11 +109,6 @@ public class StartGame extends javax.swing.JFrame {
                         .addGap(259, 259, 259)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -131,7 +116,8 @@ public class StartGame extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jSpinner3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +125,8 @@ public class StartGame extends javax.swing.JFrame {
                             .addComponent(jSpinner2)
                             .addComponent(jSpinner4)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSpinner5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(166, Short.MAX_VALUE))
@@ -172,11 +159,11 @@ public class StartGame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(jButton1)
                 .addContainerGap(219, Short.MAX_VALUE))
         );
@@ -187,8 +174,8 @@ public class StartGame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CoronaGame2 coronaGame2 = new CoronaGame2();
         coronaGame2.frame = new JFrame("Test");
+        coronaGame2.smothness=(((int)jSpinner5.getValue()));
         coronaGame2.numVirus=(int)jSpinner1.getValue();
-        coronaGame2.fuzzy=jRadioButton1.isSelected();
         coronaGame2.diffculty=(int)jSpinner3.getValue();
         coronaGame2.speed=(int)jSpinner4.getValue();
         coronaGame2.virusSize=(int)jSpinner2.getValue();
@@ -196,15 +183,11 @@ public class StartGame extends javax.swing.JFrame {
         coronaGame2.CoronaImage= t.getImage(absPath+jComboBox1.getSelectedItem().toString());
         coronaGame2.CursorImage=t.getImage(absPath+jComboBox2.getSelectedItem().toString());
         if(jComboBox2.getSelectedItem().toString().equals("default"))coronaGame2.CursorImage=null;
-        if(jComboBox1.getSelectedItem().toString().equals("default"))coronaGame2.CoronaImage=t.getImage("corona1.png");
+        if(jComboBox1.getSelectedItem().toString().equals("default"))coronaGame2.CoronaImage=t.getImage("src"+File.separator+"DodgeGame"+File.separator+"corona1.png");
         coronaGame2.go();
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-       
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,11 +236,11 @@ public class StartGame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
+    private javax.swing.JSpinner jSpinner5;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,11 @@
+1. In java Mod of negetive number x is (x)%m= (|x|-|x|%m) //check
+
+2. Only perfect squares have odd number of unique devisors
+
+3.Number of perfect squares before n is sqrt(n)
+
+4. Detect cycle in Directed graph, topo sort
+
+5. Reguler expression
+
+6. 1 july leet code mock interview q2.
