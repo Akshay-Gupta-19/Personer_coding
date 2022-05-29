@@ -1,12 +1,16 @@
-/major2/build/
-/major2/nbproject/private/
-/CompilerDesign/build/
-/CompilerDesign/nbproject/private/
-/GeeksforGeeks/build/
-/GeeksforGeeks/nbproject/private/
-/Hackerearth/build/
-/Hackerearth/nbproject/private/
-/Hackerrank/build/
-/Hackerrank/nbproject/private/
-/usefulcollection/build/
-/usefulcollection/nbproject/private/
+# NetBeans specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
