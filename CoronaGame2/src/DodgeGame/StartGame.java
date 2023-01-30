@@ -29,7 +29,7 @@ public class StartGame extends javax.swing.JFrame {
         jSpinner1.setValue(50);
         jSpinner3.setValue(100);
         jSpinner2.setValue(70);
-        jSpinner4.setValue(2);
+        jSpinner4.setValue(1);
         jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();
         File curentFile[] = new File(".\\").listFiles();

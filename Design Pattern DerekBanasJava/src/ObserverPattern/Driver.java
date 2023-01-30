@@ -1,6 +1,6 @@
 package ObserverPattern;
 
-public class GrabStocks {
+public class Driver {
 
     public static void main(String[] args) {
 

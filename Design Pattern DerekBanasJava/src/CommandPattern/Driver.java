@@ -16,7 +16,7 @@ public class Driver {
         
         List<Integer> number=List.of(5,2,5);
         Calculator mycalc=new Calculator(number);
-         Command add=new Adder(mycalc);
+        Command add=new Adder(mycalc);
         Command mul=new Mul(mycalc);
         CalculatorUser user=new CalculatorUser();
         System.out.println(user.placeComputation(add));

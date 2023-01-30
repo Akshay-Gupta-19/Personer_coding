@@ -136,7 +136,7 @@ final public class CoronaGame2 {
 
         new Thread(() -> {
             while (true) {
-                int randomDirChange=random.nextInt(numVirus*(smothness+1)*10);
+                int randomDirChange=numVirus;//random.nextInt(numVirus*(smothness+1)*10);
                 for (int i = 0; i < numVirus; i++) {
                     if (oneX[i] >= frame.getWidth() - 1 ||  randomDirChange<i) {
                         dirx[i] = -dirx[i];
