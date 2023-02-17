@@ -4,6 +4,8 @@
  */
 package StratagyPatternSorting;
 
+import java.util.*;
+
 /**
  *
  * @author guptaakshay
@@ -14,5 +16,6 @@ public class Driver {
         int arr[]=new int[100];
         Context cntex=new Context(bubbleSort);
         cntex.sort(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }

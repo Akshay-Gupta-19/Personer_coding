@@ -9,5 +9,11 @@ package StratagyPatternSorting;
  * @author guptaakshay
  */
 public class Context {
-    
+    ISorting sorting;
+    Context(ISorting sorting){
+        this.sorting=sorting;
+    }
+    void sort(int arr[]){
+        this.sorting.sort(arr);
+    }
 }
