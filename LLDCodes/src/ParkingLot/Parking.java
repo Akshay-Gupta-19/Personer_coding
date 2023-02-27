@@ -28,10 +28,12 @@ public class Parking {
         parkingLot.addGateWorker("Montu", new MallGateKeeper("Montu"));
         parkingLot.addGateWorker("Chotu", new MallGateKeeper("Chotu"));
 
-        doThings(parkingLot);
+        Ticket jatinTicket=  addTickets(parkingLot);
+        System.out.println("");
+        closeTicket(parkingLot, jatinTicket);
     }
 
-    static void doThings(ParkingLot parkingLot) {
+    static Ticket addTickets(ParkingLot parkingLot) {
         Map<String, Admin> admins = parkingLot.getAdmins();
         Admin paplue = admins.get("Paplue");
         try {
@@ -61,7 +63,12 @@ public class Parking {
         Vechile HeroHonda2 = new Vechile(VechileType.Bike, "MH21V3451 2", pankaj2);
         Ticket pankajTicket2 = bablue.findSpotAndGetTicket(parkingLot, HeroHonda2, 12);
 
-        
+        return jatinTicket;
+    }
+    
+    static void closeTicket(ParkingLot parkingLot , Ticket ticketToClose){
+        GateWorker bablue = parkingLot.getGateWorkers().get("Bablue");
+        bablue.closeTicket(parkingLot, ticketToClose);
     }
 }
 
@@ -236,6 +243,7 @@ interface GateWorker {
     Ticket findSpotAndGetTicket(ParkingLot parkingLot, Vechile vechile, double rate);
 
     Price closeTicket(ParkingLot parkingLot, Ticket ticket);
+    
 }
 
 abstract class GenralGateKeeper extends Person implements GateWorker {
@@ -257,7 +265,9 @@ abstract class GenralGateKeeper extends Person implements GateWorker {
     @Override
     public Price closeTicket(ParkingLot parkingLot, Ticket ticket) {
         parkingLot.getSpotCollection().freeSpot(ticket.parkingSpot);
-        return priceCaclulator.caclulatePrice(ticket, new Date());
+        Price price = priceCaclulator.caclulatePrice(ticket, new Date());
+        System.out.println("Closing ticket" + ticket +" Fianl Price "+price);
+        return price;
     }
 }
 
@@ -276,6 +286,13 @@ class Price {
     public Price(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Price{" + "price=" + price + '}';
+    }
+    
+    
 }
 
 class PriceCaclulator {
