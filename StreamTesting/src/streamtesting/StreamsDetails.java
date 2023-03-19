@@ -20,6 +20,11 @@ public class StreamsDetails {
         Stream<String> stream = Stream.of("25", "10", "15", "20", "25");
         TreeSet<String> collect = stream.collect(Collectors.toCollection(() -> new TreeSet<String>()));
 
+        
+        int nums2[] = new int[]{3,2,6,1,8,3,2,4,3,1,3,6,4,7,8};
+        Map<Integer,Long> frequency=Arrays.stream(nums2).boxed().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+        System.out.println(frequency);
+        
         List<int[]> of = List.of(new int[]{1, 2, 6, 2, 3});
         HashMap hs = new HashMap();
         hs.put(0, 1);

@@ -4,7 +4,6 @@
  */
 package BuilderPattern_2;
 
-import BuilderPattern.*;
 import java.awt.Color;
 
 /**

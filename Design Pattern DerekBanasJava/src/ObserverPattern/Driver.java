@@ -1,5 +1,7 @@
 package ObserverPattern;
 
+//Pub Sub model very useful
+
 public class Driver {
 
     public static void main(String[] args) {

@@ -12,46 +12,49 @@ import jdk.jfr.Description;
  * @author guptaakshay
  */
 
-interface ICalendarItem{
-    String printDetails();
-}
-class Item implements ICalendarItem{
-    String Description;
+//Child of interface also contains a reference to some other and add functionality on top of it.
 
-    public Item(String Description) {
-        this.Description = Description;
-    }
-    
+interface Computer{
+    String getDetails();
+}
+class PlainComputer implements Computer{
+
     @Override
-    public String printDetails() {
-        return this.Description;
+    public String getDetails() {
+        return "Computer";
     }
-    
 }
 
-abstract class ItemDecorator implements ICalendarItem{
-    
-}
-class ItemEvent extends ItemDecorator{
+class DVD implements Computer{
+    Computer computer;
 
-    Date start,end;
-    ICalendarItem item;
-
-    public ItemEvent(Date start, Date end, ICalendarItem item) {
-        this.start = start;
-        this.end = end;
-        this.item = item;
+    public DVD(Computer computer) {
+        this.computer = computer;
     }
-    
+
     @Override
-    public String printDetails() {
-        return item.printDetails() +" Start Date = "+start+" EndDate "+end;
-    }    
+    public String getDetails() {
+        return computer.getDetails()+" And DVD";
+    }
 }
-class Drive{
+class USBPort implements Computer{
+        Computer computer;
+
+    public USBPort(Computer computer) {
+        this.computer = computer;
+    }
+
+    @Override
+    public String getDetails() {
+        return computer.getDetails()+" And USBPort";
+    }
+}
+
+
+class Client{
     public static void main(String[] args) {
-        ICalendarItem plainItem=new Item("abc");
-        ICalendarItem event = new ItemEvent(new Date(100), new Date(200), plainItem);
-        System.out.println(event.printDetails());
+        Computer computer = new PlainComputer();
+        USBPort usbPort = new USBPort(new DVD(computer));
+        System.out.println(usbPort.getDetails());
     }
 }

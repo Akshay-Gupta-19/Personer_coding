@@ -169,7 +169,7 @@ class Draft implements EventActions{
 
     @Override
     public void update(Event newEvent) {
-        this.event.update(newEvent);
+        event.update(newEvent);
     }
 
     @Override

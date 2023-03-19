@@ -5,71 +5,22 @@
 package ParkingLot;
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author guptaakshay Requirments 1. User can request spot 2. User can request
- * checkout 3. user can make payment 4. Receptionist can request a parking spot
- * lowest number will go first // need policy 5. Receptionist at entry can book
- * the spot and create a ticket 6. Receptionist at exit can close a ticket 7.
- * Admin can add new parking spot 8. Admin can add new entry or exit point
+ * @author guptaakshay 
+ * Requirments 
+ * 1. User can request spot 
+ * 2. User can request checkout 
+ * 3. user can make payment 
+ * 4. Receptionist can request a parking spot lowest number will go first // need policy 
+ * 5. Receptionist at entry can book the spot and create a ticket 
+ *6. Receptionist at exit can close a ticket 
+ *7.Admin can add new parking spot 
+ *8. Admin can add new entry or exit point
  */
 public class Parking {
 
-    public static void main(String[] args) {
-        ParkingLot parkingLot = new MallParkingLot();
-        parkingLot.addAdmin("Paplue", new MallAdmin("Paplue"));
-        parkingLot.addAdmin("Taplue", new MallAdmin("Taplue"));
-        parkingLot.addAdmin("Chaplue", new MallAdmin("Chaplue"));
-
-        parkingLot.addGateWorker("Bablue", new MallGateKeeper("Bablue"));
-        parkingLot.addGateWorker("Montu", new MallGateKeeper("Montu"));
-        parkingLot.addGateWorker("Chotu", new MallGateKeeper("Chotu"));
-
-        Ticket jatinTicket=  addTickets(parkingLot);
-        System.out.println("");
-        closeTicket(parkingLot, jatinTicket);
-    }
-
-    static Ticket addTickets(ParkingLot parkingLot) {
-        Map<String, Admin> admins = parkingLot.getAdmins();
-        Admin paplue = admins.get("Paplue");
-        try {
-            for (int i = 0; i < VechileType.values().length; i++) {
-                for (int j = 0; j < 10; j++) {
-                    for (int k = 0; k < 100; k++) {
-                        for (int l = 0; l < 100; l++) {
-                            paplue.addParkingSpot(parkingLot, new MallParkingSpot(VechileType.values()[i], j + "th", k, l));
-                        }
-                    }
-                }
-            }
-        } catch (SpotNotFoundException ex) {
-            Logger.getLogger(Parking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        GateWorker bablue = parkingLot.getGateWorkers().get("Bablue");
-        Customer pankaj = new Customer("Pankaj");
-        Vechile HeroHonda = new Vechile(VechileType.Bike, "MH21V3451", pankaj);
-        Ticket pankajTicket = bablue.findSpotAndGetTicket(parkingLot, HeroHonda, 10);
-
-        Customer jatin = new Customer("Jatin");
-        Vechile Nano = new Vechile(VechileType.Car, "MH21V7535", jatin);
-        Ticket jatinTicket = bablue.findSpotAndGetTicket(parkingLot, Nano, 20);
-
-        Customer pankaj2 = new Customer("Pankaj2");
-        Vechile HeroHonda2 = new Vechile(VechileType.Bike, "MH21V3451 2", pankaj2);
-        Ticket pankajTicket2 = bablue.findSpotAndGetTicket(parkingLot, HeroHonda2, 12);
-
-        return jatinTicket;
-    }
-    
-    static void closeTicket(ParkingLot parkingLot , Ticket ticketToClose){
-        GateWorker bablue = parkingLot.getGateWorkers().get("Bablue");
-        bablue.closeTicket(parkingLot, ticketToClose);
-    }
 }
 
 enum VechileType {
@@ -82,7 +33,7 @@ enum VechileType {
 
 interface SpotCollection<ParkingSpot> {
 
-    ParkingSpot fillFreeSpot(VechileType vechileType);
+    ParkingSpot fillFreeSpot(VechileType vechileType) throws NoSpotAvailable;
 
     void freeSpot(ParkingSpot spotToFree);
 
@@ -105,8 +56,11 @@ class MallSpotCollection implements SpotCollection<ParkingSpot> {
     }
 
     @Override
-    public ParkingSpot fillFreeSpot(VechileType vechileType) {
+    public ParkingSpot fillFreeSpot(VechileType vechileType) throws NoSpotAvailable {
         ParkingSpot firstFree = spotCollection.get(vechileType).poll();
+        if (firstFree == null) {
+            throw new NoSpotAvailable();
+        }
         return firstFree;
     }
 
@@ -145,6 +99,10 @@ class SpotNotFoundException extends Exception {
 
 }
 
+class NoSpotAvailable extends Exception {
+
+}
+
 interface ParkingSpot extends Comparable<ParkingSpot> {
 
     VechileType getVechileType();
@@ -180,7 +138,7 @@ class MallParkingSpot implements ParkingSpot {
             return 1;
         }
         MallParkingSpot otherMallParkingSpot = (MallParkingSpot) otherSpot;
-        if(!otherSpot.getFloor().equals(this.floor)){
+        if (!otherSpot.getFloor().equals(this.floor)) {
             return this.getFloor().compareTo(otherMallParkingSpot.getFloor());
         }
         int rowCompare = this.row.compareTo(otherMallParkingSpot.row);
@@ -227,7 +185,6 @@ abstract class Person {
         return "Person{" + "name=" + name + '}';
     }
 
-    
 }
 
 class Customer extends Person {
@@ -240,41 +197,45 @@ class Customer extends Person {
 
 interface GateWorker {
 
-    Ticket findSpotAndGetTicket(ParkingLot parkingLot, Vechile vechile, double rate);
+    Ticket findSpotAndGetTicket(Vechile vechile, double rate) throws NoSpotAvailable;
 
-    Price closeTicket(ParkingLot parkingLot, Ticket ticket);
-    
+    Price closeTicket(Ticket ticket);
+
 }
 
 abstract class GenralGateKeeper extends Person implements GateWorker {
 
     PriceCaclulator priceCaclulator = PriceCaclulator.getCaclculator();
 
-    public GenralGateKeeper(String name) {
+    ParkingLot parkingLot;
+
+    public GenralGateKeeper(ParkingLot parkingLot, String name) {
         super(name);
+        this.parkingLot = parkingLot;
     }
 
     @Override
-    public Ticket findSpotAndGetTicket(ParkingLot parkingLot, Vechile vechile, double rate) {
+    public Ticket findSpotAndGetTicket(Vechile vechile, double rate) throws NoSpotAvailable {
         ParkingSpot bookedSpot = parkingLot.getSpotCollection().fillFreeSpot(vechile.vechileType);
+
         Ticket newTicket = new Ticket(vechile, new Date(), bookedSpot, rate, this);
         System.out.println("Assigning new ticket " + newTicket);
         return newTicket;
     }
 
     @Override
-    public Price closeTicket(ParkingLot parkingLot, Ticket ticket) {
+    public Price closeTicket(Ticket ticket) {
         parkingLot.getSpotCollection().freeSpot(ticket.parkingSpot);
         Price price = priceCaclulator.caclulatePrice(ticket, new Date());
-        System.out.println("Closing ticket" + ticket +" Fianl Price "+price);
+        System.out.println("Closing ticket" + ticket + " Fianl Price " + price);
         return price;
     }
 }
 
 class MallGateKeeper extends GenralGateKeeper {
 
-    public MallGateKeeper(String name) {
-        super(name);
+    public MallGateKeeper(ParkingLot parkingLot, String name) {
+        super(parkingLot, name);
     }
 
 }
@@ -291,8 +252,7 @@ class Price {
     public String toString() {
         return "Price{" + "price=" + price + '}';
     }
-    
-    
+
 }
 
 class PriceCaclulator {
@@ -312,32 +272,41 @@ class PriceCaclulator {
 
 interface Admin {
 
-    void addParkingSpot(ParkingLot parkingLot, ParkingSpot parkingSpot) throws SpotNotFoundException;
+    void addParkingSpot(ParkingSpot parkingSpot) throws SpotNotFoundException;
 
-    void removeParkingSpot(ParkingLot parkingLot, ParkingSpot parkingSpot) throws SpotNotFoundException;
+    void removeParkingSpot(ParkingSpot parkingSpot) throws SpotNotFoundException;
 }
 
 abstract class GeneralAdmin extends Person implements Admin {
 
-    public GeneralAdmin(String name) {
+    ParkingLot parkingLot;
+
+    public GeneralAdmin(ParkingLot parkingLot, String name) {
         super(name);
+        this.parkingLot = parkingLot;
     }
 
     @Override
-    public void addParkingSpot(ParkingLot parkingLot, ParkingSpot parkingSpot) throws SpotNotFoundException {
+    public void addParkingSpot(ParkingSpot parkingSpot) throws SpotNotFoundException {
         parkingLot.getSpotCollection().addSpot(parkingSpot);
+        System.out.println(name + " Added spot " + parkingSpot);
     }
 
     @Override
-    public void removeParkingSpot(ParkingLot parkingLot, ParkingSpot parkingSpot) throws SpotNotFoundException {
+    public void removeParkingSpot(ParkingSpot parkingSpot) throws SpotNotFoundException {
         parkingLot.getSpotCollection().removeSpot(parkingSpot);
     }
 }
 
 class MallAdmin extends GeneralAdmin {
 
-    public MallAdmin(String name) {
-        super(name);
+    public MallAdmin(ParkingLot parkingLot, String name) {
+        super(parkingLot, name);
+    }
+
+    @Override
+    public void addParkingSpot(ParkingSpot parkingSpot) throws SpotNotFoundException {
+        super.addParkingSpot(parkingSpot); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
 }
@@ -370,26 +339,15 @@ class Ticket {
 
 interface ParkingLot {
 
-    SpotCollection<ParkingSpot> getSpotCollection();
-
-    Map<String, Admin> getAdmins();
-
-    Map<String, GateWorker> getGateWorkers();
-
-    void addAdmin(String name, Admin admin);
-
-    void addGateWorker(String name, GateWorker gateWorker);
+    public SpotCollection<ParkingSpot> getSpotCollection();
 }
 
 class MallParkingLot implements ParkingLot {
 
     SpotCollection mallSpotCollection = new MallSpotCollection();
-    Map<String, Admin> admins;
-    Map<String, GateWorker> gateWorkers;
 
     public MallParkingLot() {
-        this.admins = new HashMap<>();
-        this.gateWorkers = new HashMap();
+
     }
 
     @Override
@@ -397,23 +355,4 @@ class MallParkingLot implements ParkingLot {
         return mallSpotCollection;
     }
 
-    @Override
-    public Map<String, Admin> getAdmins() {
-        return admins;
-    }
-
-    @Override
-    public Map<String, GateWorker> getGateWorkers() {
-        return gateWorkers;
-    }
-
-    @Override
-    public void addAdmin(String name, Admin admin) {
-        this.admins.put(name, admin);
-    }
-
-    @Override
-    public void addGateWorker(String name, GateWorker gateWorker) {
-        this.gateWorkers.put(name, gateWorker);
-    }
 }
