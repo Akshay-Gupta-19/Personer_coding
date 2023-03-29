@@ -54,6 +54,7 @@ class IITBookCollection implements BookCollection {
 
     @Override
     public void addNewBook(BookType book) {
+        System.out.println("Adding book type "+book);
         books.put(book.getName(), book);
     }
 
@@ -78,7 +79,7 @@ class IITBookCollection implements BookCollection {
 
 }
 
-class IITBLocationCollection implements LocationCollection{
+class IITBLocationCollection  implements LocationCollection{
 
     Queue<Location> locations;
 
@@ -116,12 +117,14 @@ class IITBLocationCollection implements LocationCollection{
     }
     
 }
-class IITBMemeber implements Member{
+class IITBMemeber extends Person implements Member{
     Librarian librarion;
 
-    public IITBMemeber(Librarian librarion) {
+    public IITBMemeber(Librarian librarion, String name, int uniqueId) {
+        super(name, uniqueId);
         this.librarion = librarion;
     }
+    
 
     @Override
     public Ticket requestBook(String book) throws BookNotAvailable, NoBookCopyAvaialble {
@@ -140,17 +143,20 @@ class IITBMemeber implements Member{
     
 }
 
-class IITBLibrarion implements Librarian{
+class IITBLibrarion extends Person implements Librarian{
 
     Library library;
 
-    public IITBLibrarion(Library library) {
+    public IITBLibrarion(Library library, String name, int uniqueId) {
+        super(name, uniqueId);
         this.library = library;
     }
-    
+
+ 
     @Override
     public Fine returnBook(Ticket ticket) {
         try{
+            System.out.println("Returning book "+ticket);
            return library.bookCollection.returnOneBook(ticket);
         }catch(BookNotAvailable ex){
             System.err.println("Book type removed");
@@ -160,7 +166,7 @@ class IITBLibrarion implements Librarian{
 
     @Override
     public Ticket bookNow(Member member,String book) throws BookNotAvailable, NoBookCopyAvaialble {
-        return library.bookCollection.issueOneCopy(member, book);
+       return library.bookCollection.issueOneCopy(member, book);
     }
 
     @Override
@@ -169,15 +175,15 @@ class IITBLibrarion implements Librarian{
     }
     
 }
-class IITBAdmin implements Admin{
+class IITBAdmin extends Person implements Admin{
 
     Library library;
 
-    public IITBAdmin(Library library) {
+    public IITBAdmin(Library library, String name, int uniqueId) {
+        super(name, uniqueId);
         this.library = library;
     }
-    
-    
+
     @Override
     public void addLocation(Location location) {
         library.locations.addLocation(location);
@@ -188,6 +194,7 @@ class IITBAdmin implements Admin{
         Location firstFree = library.locations.fillFirstFree();
         book.setLocation(firstFree);
         library.bookCollection.addBookCopy(book);
+        System.out.println("Adding book "+book+" On "+firstFree);
     }
 
     @Override

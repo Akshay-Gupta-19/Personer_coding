@@ -44,9 +44,22 @@ public class Library {
         this.locations = new IITBLocationCollection();
     }
     
+}
+abstract class Person{
+    String name;
+    int uniqueId;
+
+    public Person(String name, int uniqueId) {
+        this.name = name;
+        this.uniqueId = uniqueId;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "name=" + name + ", uniqueId=" + uniqueId + '}';
+    }
     
 }
-
 interface Admin {
 
     void addLocation(Location location);
@@ -66,7 +79,7 @@ interface Librarian {
 }
 
 interface Member {
-
+    
     Ticket requestBook(String book) throws BookNotAvailable,NoBookCopyAvaialble;
 
     Fine returnBook(Ticket ticket);
@@ -138,7 +151,7 @@ class BookType {
 
     @Override
     public String toString() {
-        return "Book{" + "name=" + name + ", bookId=" + bookId + ", author=" + author + ", pubDate=" + pubDate + ", uniqueIds=" + copyIds + '}' + " Total " + copyIds.size() + " Copies available";
+        return "Book{" + "name=" + name + ", bookId=" + bookId + ", author=" + author + ", pubDate=" + pubDate + '}' + " Total " + copyIds.size() + " Copies available";
     }
 
 }
@@ -154,11 +167,14 @@ class BookCopy{
         this.type = type;
     }
 
-
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    @Override
+    public String toString() {
+        return "BookCopy{" + "uniqueCopyId=" + uniqueCopyId + ", location=" + location + ", type=" + type + '}';
+    }
 }
 
 interface BookCollection {
@@ -212,11 +228,14 @@ class Ticket {
         this.issueDate = issueDate;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" + "member=" + member + ", book=" + book + ", issueDate=" + issueDate + ", exptectedReturn=" + exptectedReturn + ", fineMutliplier=" + fineMutliplier + '}';
+    }
+
+    
 }
 
-class Reservation {
-
-}
 
 class Location {
     int floor, shelf, row, col;
